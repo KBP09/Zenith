@@ -1,0 +1,24 @@
+.sidebar-item {
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for background and scaling */
+}
+
+.sidebar-item:hover {
+    transform: translateX(5px); /* Slide effect */
+}
+
+.sidebar-item img {
+    transition: transform 0.2s ease; /* Animate icon scaling */
+}
+
+.sidebar-item:hover img {
+    transform: scale(1.2); /* Slightly enlarge the icon on hover */
+}
+
+button {
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for button */
+}
+
+button:hover {
+    background-color: #007bff; /* Slightly lighter blue */
+    transform: scale(1.05); /* Enlarge the button on hover */
+}
