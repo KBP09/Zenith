@@ -1,11 +1,32 @@
-import React from 'react'
-import { Bell, MessageCircle } from 'lucide-react'
-import badge from '../assets/main_badge.png'
-import demobadge from '../assets/badgedemo.png'
+import React from 'react';
+import { Bell, MessageCircle } from 'lucide-react';
+import badge from '../assets/main_badge.png';
+import demobadge from '../assets/badgedemo.png';
+import Sidebar from '../components/shared/sidebar';
+import { motion } from 'framer-motion';
 
-// Components
-import Sidebar from '../components/shared/sidebar'
+// Animation Variants
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { duration: 0.2, when: 'beforeChildren', staggerChildren: 0.25 },
+    },
+};
 
+const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
+};
+
+const bounceAnimation = {
+    whileHover: { scale: 1.1, rotate: 3 },
+    whileTap: { scale: 0.9 },
+};
+
+const pulseAnimation = {
+    whileHover: { scale: 1.05, transition: { yoyo: Infinity, duration: 0.5 } },
+};
 
 const badgeItems = [
     { icon: '🏆', label: 'Goal Achiever', value: 'Completed 10 Goals', date: '2024-10-01' },
@@ -13,102 +34,119 @@ const badgeItems = [
     { icon: '🧠', label: 'Mindful Tracker', value: '7 Days of Mindfulness', date: '2024-10-03' },
     { icon: '💡', label: 'Creative Thinker', value: '3 Ideas Implemented', date: '2024-10-04' },
     { icon: '🚀', label: 'High Performer', value: 'Achieved 90% Productivity', date: '2024-10-05' },
-    { icon: '🌱', label: 'Growth Mindset', value: 'Engaged in 5 Personal Development Activities', date: '2024-10-06' },
-    { icon: '🛌', label: 'Rest and Recharge', value: 'Maintained Sleep Schedule for 14 Days', date: '2024-10-07' },
-    { icon: '💪', label: 'Wellness Warrior', value: 'Consistent Exercise for 30 Days', date: '2024-10-08' },
-    { icon: '📅', label: 'Time Manager', value: 'Organized 30 Tasks', date: '2024-10-09' },
-    { icon: '✨', label: 'Positivity Champion', value: 'Practiced Gratitude for 10 Days', date: '2024-10-10' },
-    { icon: '🔍', label: 'Focus Finder', value: 'Reduced Distractions by 50%', date: '2024-10-11' },
-    { icon: '🤝', label: 'Collaboration Expert', value: 'Worked with 5 Team Members', date: '2024-10-12' },
-    { icon: '🗂️', label: 'Organization Ninja', value: 'Sorted 50+ Files', date: '2024-10-13' },
-    { icon: '🏅', label: 'Consistency Champion', value: 'Consistent Tracking for 30 Days', date: '2024-10-14' },
-    { icon: '🗣️', label: 'Feedback Seeker', value: 'Received Feedback on 5 Projects', date: '2024-10-15' },
 ];
-
 
 export default function Profile() {
     return (
-        <div className="flex h-screen overflow-hidden bg-[#0C142C] text-white">
-            {/* Sidebar */}
-            <Sidebar />
+        <div className="flex h-screen  bg-[#0C142C] text-white">
+            <Sidebar selectedNav={"Profile"} />
 
-            {/* Main Content */}
-            <div className="flex-1 p-8">
-                <div className="flex justify-between items-center mb-8">
-                    <div className="flex items-center">
-                        <Bell className="mr-4" />
-                        <span>4k viewers</span>
-                    </div>
-                    <div className="flex items-center">
-                        <MessageCircle className="mr-2" />
-                        <span>Contact Us</span>
-                    </div>
+            <motion.div
+                className="flex-1 p-4 sm:p-8 overflow-scroll"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
+                    <motion.div className="flex items-center mb-4 sm:mb-0" variants={itemVariants} {...bounceAnimation}>
+                        <Bell className="mr-4 cursor-pointer" />
+                        <span className="text-lg sm:text-xl">4k viewers</span>
+                    </motion.div>
+                    <motion.div className="flex items-center" variants={itemVariants} {...bounceAnimation}>
+                        <MessageCircle className="mr-2 cursor-pointer" />
+                        <span className="text-sm sm:text-base">Contact Us</span>
+                    </motion.div>
                 </div>
 
-                {/* User Profile */}
-                <div className="rounded-lg p-6 mb-8 flex metallic-textured-background">
-                    <img className='w-52 h-52 self-center' src="./src/assets/pfp.png" alt="pfp" />
-                    <div className='w-[calc(100%-208px)]'>
-                        <div className="flex items-center justify-between">
-
-                            <div className="flex">
-
-                                <div className='p-4'>
-                                    <h2 className="text-2xl font-bold">Kartik Pokhriyal</h2>
-                                    <p className="text-red-400">Challenging</p>
-                                    <div className='p-4 pl-0 flex gap-2'>
-                                        <span className='border-2 p-2 rounded-3xl text-gray-400 border-[#23447d]'>Novice Analyst</span>
-                                        <span className='border-2 p-2 rounded-3xl text-gray-400 border-[#23447d]'>Master Strategist</span>
-                                    </div>
+                <motion.div
+                    className="rounded-lg p-4 sm:p-6 mb-8 flex metallic-textured-background flex-col sm:flex-row"
+                    variants={itemVariants}
+                    {...pulseAnimation}
+                >
+                    <motion.img
+                        className="w-32 h-32 sm:w-52 sm:h-52 self-center rounded-full shadow-lg cursor-pointer"
+                        src="./src/assets/pfp.png"
+                        alt="pfp"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                    />
+                    <div className="w-full sm:w-[calc(100%-208px)] ml-0 sm:ml-6">
+                        <div className="flex flex-col sm:flex-row items-center justify-between">
+                            <div>
+                                <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">Kartik Pokhriyal</h2>
+                                <p className="text-red-400 mb-4">Challenging</p>
+                                <div className="flex flex-col sm:flex-row gap-2">
+                                    <motion.span
+                                        className="border-2 px-4 py-1 rounded-3xl text-gray-400 border-[#23447d] cursor-pointer"
+                                        whileHover={{ backgroundColor: '#1A73E8', color: '#fff' }}
+                                    >
+                                        Novice Analyst
+                                    </motion.span>
+                                    <motion.span
+                                        className="border-2 px-4 py-1 rounded-3xl text-gray-400 border-[#23447d] cursor-pointer"
+                                        whileHover={{ backgroundColor: '#1A73E8', color: '#fff' }}
+                                    >
+                                        Master Strategist
+                                    </motion.span>
                                 </div>
-
                             </div>
-                            <button className="bg-blue-500 self-start mt-4  text-white px-4 py-2 rounded-full">
+                            <motion.button
+                                className="bg-blue-500 text-white px-4 sm:px-6 py-2 rounded-full shadow-lg mt-4 sm:mt-0"
+                                {...bounceAnimation}
+                            >
                                 Refer Now
-                            </button>
+                            </motion.button>
                         </div>
-                        <div className="flex items-center justify-between ">
-                            <div className="flex items-center mr-4">
-                                <span className="text-green-500 mr-1"><img className='w-20 h-20' src={badge} alt="badge" /></span>
-                                <span className="text-5xl font-bold mb-2">42</span>
+
+                        <div className="flex items-center justify-between mt-6">
+                            <div className="flex items-center">
+                                <motion.img
+                                    className="w-16 h-16 sm:w-20 sm:h-20 cursor-pointer"
+                                    src={badge}
+                                    alt="badge"
+                                    whileHover={{ rotate: 360, transition: { duration: 0.8 } }}
+                                />
+                                <span className="text-4xl sm:text-5xl font-bold ml-4">42</span>
                             </div>
                             <div className="text-xl flex gap-1 text-gray-400 items-end">
-                                Points <p className='text-5xl text-slate-50 font-semibold'>142</p>
+                                Points <p className="text-4xl sm:text-5xl text-slate-50 font-semibold">142</p>
                             </div>
                         </div>
                     </div>
-                    
-                </div>
+                </motion.div>
 
-                {/* Earned Badges */}
-                <div className="bg-[#12284E] rounded-lg p-6 h-[300px] overflow-scroll">
-                    <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-xl font-bold">Earned Badges</h3>
-                    </div>
-                    <table className="w-full">
+                <motion.div
+                    className="bg-[#12284E] rounded-lg p-4 sm:p-6 overflow-y-auto"
+                    variants={itemVariants}
+                >
+                    <h3 className="text-lg sm:text-xl font-bold mb-4">Earned Badges</h3>
+                    <table className="w-full text-sm sm:text-base">
                         <thead>
                             <tr className="text-gray-400">
                                 <th className="text-left pb-2">Badge</th>
                                 <th className="text-left pb-2">Value</th>
                                 <th className="text-left pb-2">Date</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
                             {badgeItems.map((item, index) => (
-                                <tr key={index} className="border-t border-gray-700">
+                                <motion.tr
+                                    key={index}
+                                    className="border-t border-gray-700"
+                                    variants={itemVariants}
+                                    whileHover={{ scale: 1.02, backgroundColor: '#1A1F36' }}
+                                >
                                     <td className="py-2 text-lg font-semibold flex items-center">
-                                        <span className="mr-2"><img className='w-16 h-16' src={demobadge} alt="" /></span>
+                                        <img className="w-16 h-16 mr-4" src={demobadge} alt="badge-icon" />
                                         {item.label}
                                     </td>
                                     <td className="py-2">{item.value}</td>
                                     <td className="py-2">{item.date}</td>
-                                </tr>
+                                </motion.tr>
                             ))}
                         </tbody>
                     </table>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </div>
-    )
+    );
 }

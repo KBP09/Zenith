@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+body{
+  background-color: #0C142C;
+  color: white;
+}
 
 .metallic-textured-background {
   background-image: url('./assets/metallic.png'), linear-gradient(145deg, rgba(18, 40, 78, 0.4), rgba(0, 0, 0, 0.3));

@@ -3,7 +3,7 @@ import Sidebar from '../components/shared/sidebar'
 const Settings = () => {
   return (
     <>
-     <Sidebar /> 
+     <Sidebar selectedNav={"Settings"} /> 
     </>
   )
 }

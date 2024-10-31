@@ -3,7 +3,7 @@ import Sidebar from '../components/shared/sidebar'
 const GoalTracker = () => {
   return (
     <>
-     <Sidebar /> 
+     <Sidebar selectedNav={"Goal Tracker"} /> 
     </>
   )
 }

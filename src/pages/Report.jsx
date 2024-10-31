@@ -3,7 +3,7 @@ import Sidebar from '../components/shared/sidebar'
 const Report = () => {
   return (
     <>
-     <Sidebar /> 
+     <Sidebar selectedNav={"30 Days Report"} /> 
     </>
   )
 }

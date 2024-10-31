@@ -3,7 +3,7 @@ import Sidebar from '../components/shared/sidebar'
 const Dashboard = () => {
   return (
     <>
-     <Sidebar /> 
+     <Sidebar selectedNav={"Dashboard"} /> 
     </>
   )
 }
