@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const TimeRangeSelector = ({ timeRange, setTimeRange }) => (
-  <div className="flex justify-center space-x-2 mb-6">
+  <div className='flex justify-center space-x-2 mb-6'>
     {['day', 'week', 'month'].map((range) => (
       <motion.button
         key={range}
