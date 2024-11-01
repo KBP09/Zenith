@@ -44,27 +44,38 @@ const Dashboard = () => {
   });
   const [events] = useState(generateEvents());
 
+  const generateRandomScore = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+  const generateWebsiteUsage = (websites) =>
+    websites.map((site) => ({
+      ...site,
+      value: generateRandomScore(5000, 15000),
+    }));
+
+  const generateTopApps = (apps) =>
+    apps.map((app) => ({
+      ...app,
+      time: generateRandomScore(1000, 6000),
+      change: generateRandomScore(-10, 10),
+    }));
+
   useEffect(() => {
     setIsLoading(true);
+
     setTimeout(() => {
       const historicalData = fakeData.getHistoricalData(timeRange);
+
       setData((prevData) => ({
         ...prevData,
-        focusScore: Math.floor(Math.random() * 20) + 80,
-        productivityScore: Math.floor(Math.random() * 20) + 80,
-        wellbeingScore: Math.floor(Math.random() * 20) + 70,
-        contentConsumptionScore: Math.floor(Math.random() * 30) + 60,
-        websiteUsage: fakeData.websiteUsage.map((site) => ({
-          ...site,
-          value: Math.floor(Math.random() * 10000) + 5000,
-        })),
+        focusScore: generateRandomScore(80, 100),
+        productivityScore: generateRandomScore(80, 100),
+        wellbeingScore: generateRandomScore(70, 90),
+        contentConsumptionScore: generateRandomScore(60, 90),
+        websiteUsage: generateWebsiteUsage(fakeData.websiteUsage),
         moodData: historicalData,
-        topApps: fakeData.topApps.map((app) => ({
-          ...app,
-          time: Math.floor(Math.random() * 5000) + 1000,
-          change: Math.floor(Math.random() * 20) - 10,
-        })),
+        topApps: generateTopApps(fakeData.topApps),
       }));
+
       setIsLoading(false);
     }, 1000);
   }, [timeRange]);
